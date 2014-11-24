@@ -1,0 +1,48 @@
+{
+    "name": "sastrawi/tokenizer",
+    "type": "library",
+    "description": "PHP library that allows you to tokenize Bahasa Indonesia.",
+    "keywords": [
+        "tokenizer",
+        "tokenization",
+        "text preprocessing",
+        "indonesian",
+        "bahasa",
+        "indonesia",
+        "nlp",
+        "natural language processing"
+    ],
+    "homepage": "https://github.com/sastrawi/tokenizer",
+    "authors": [
+        {
+            "name": "Andy Librian",
+            "email": "andylibrian@gmail.com",
+            "homepage": "http://andylibrian.pro",
+            "role": "Lead Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "~1",
+        "behat/behat": "~3",
+        "phpunit/phpunit": "~4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Sastrawi\\Tokenizer": "src"
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://github.com/sastrawi/tokenizer/issues",
+        "source": "https://github.com/sastrawi/tokenizer"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
