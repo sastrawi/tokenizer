@@ -9,7 +9,7 @@ class Model
     private $charPos;
 
     private $currentChar;
-    
+
     private $nextChar;
 
     private $prevChar;

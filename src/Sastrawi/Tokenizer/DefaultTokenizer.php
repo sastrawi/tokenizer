@@ -8,7 +8,6 @@
 
 namespace Sastrawi\Tokenizer;
 
-use Sastrawi\Tokenizer\Util\StringUtil;
 use Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface;
 
 /**
@@ -22,9 +21,10 @@ class DefaultTokenizer
      * @var \Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface[]
      */
     private $analyzers = array();
-    
+
     public function __construct()
     {
+        $this->addAnalyzer(new CharAnalyzer\Alphanumeric());
         $this->addAnalyzer(new CharAnalyzer\Whitespace());
         $this->addAnalyzer(new CharAnalyzer\Punctuation());
     }
@@ -50,7 +50,6 @@ class DefaultTokenizer
         $tokenBuffer = '';
 
         for ($i = 0; $i < strlen($text); $i++) {
-
             $model = new CharAnalyzer\Model($text, $i);
 
             $analyzerResultFalse = 0;
@@ -59,7 +58,6 @@ class DefaultTokenizer
             $analyzerResult = null;
 
             foreach ($this->analyzers as $analyzer) {
-
                 $analyzerResult = $analyzer->shouldSplit($model);
 
                 if ($analyzerResult === true) {
@@ -72,14 +70,14 @@ class DefaultTokenizer
             }
 
             if ($analyzerResultTrue > 0 && $analyzerResultTrue >= $analyzerResultFalse) {
-
                 if ($model->getCurrentChar() !== ' ') {
-                    $tokens[] = $tokenBuffer;
-                    $tokenBuffer = '';
+                    if (!empty($tokenBuffer)) {
+                        $tokens[] = $tokenBuffer;
+                        $tokenBuffer = '';
+                    }
 
                     $tokenBuffer = $model->getCurrentChar();
                 } else {
-                    
                     if (!empty($tokenBuffer)) {
                         $tokens[] = $tokenBuffer;
                         $tokenBuffer = '';

@@ -12,17 +12,6 @@ Feature: Simple Tokenization
       Ini kalimat pertama . Ini kalimat kedua .
       """
 
-  Scenario: Tokenize by punctuation
-    Given The following text:
-      """
-      Budi pergi ke pasar, membeli banyak hal: sapu, payung, keramik.
-      """
-    When I tokenize it
-    Then I should get the following tokens:
-      """
-      Budi pergi ke pasar , membeli banyak hal : sapu , payung , keramik .
-      """
-
   Scenario: Tokenize multiple whitespace
     Given The following text:
       """
@@ -34,13 +23,13 @@ Feature: Simple Tokenization
       Budi belajar NLP . Budi melakukan tokenization .
       """
 
-  Scenario: Tokenize multiple punctuation
+  Scenario: Tokenize multiple whitespace
     Given The following text:
       """
-      Budi   belajar   NLP... Benarkah Budi   melakukan   tokenization??!?
+      Budi membeli 2 buku tentang Natural Language Processing Bahasa Indonesia.
       """
     When I tokenize it
     Then I should get the following tokens:
       """
-      Budi belajar NLP ... Benarkah Budi melakukan tokenization ??!?
+      Budi membeli 2 buku tentang Natural Language Processing Bahasa Indonesia .
       """

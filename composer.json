@@ -22,7 +22,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "sastrawi/string-span": "~1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "~1",

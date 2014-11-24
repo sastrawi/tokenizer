@@ -1,10 +1,8 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use Sastrawi\Tokenizer\TokenizerFactory;
 
 /**
@@ -35,7 +33,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function theFollowingText(PyStringNode $string)
     {
-        $this->text = (string)$string;
+        $this->text = (string) $string;
     }
 
     /**
@@ -51,6 +49,6 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iShouldGetTheFollowingTokens(PyStringNode $string)
     {
-        \PHPUnit_Framework_Assert::assertEquals((string)$string, implode(' ', $this->tokens));
+        \PHPUnit_Framework_Assert::assertEquals((string) $string, implode(' ', $this->tokens));
     }
 }

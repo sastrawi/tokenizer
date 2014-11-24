@@ -6,7 +6,7 @@ class Whitespace implements AnalyzerInterface
 {
     public function shouldSplit(Model $model)
     {
-        if ($model->getCurrentChar() === ' ') {
+        if (in_array($model->getCurrentChar(), array(' ', "\n", "\t"))) {
             return true;
         }
     }
