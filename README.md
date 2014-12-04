@@ -1,6 +1,9 @@
 Sastrawi Tokenizer
 ==========================
 
+[![Build Status](https://travis-ci.org/sastrawi/tokenizer.svg?branch=master)](https://travis-ci.org/sastrawi/tokenizer) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sastrawi/tokenizer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sastrawi/tokenizer/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/sastrawi/tokenizer/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sastrawi/tokenizer/?branch=master)
+
+
 Sastrawi Tokenizer adalah library PHP untuk melakukan tokenization.
 
 

@@ -22,7 +22,7 @@ class DefaultTokenizer
      * @var \Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface[]
      */
     private $analyzers = array();
-    
+
     private $entityFinder;
 
     public function __construct()
@@ -45,6 +45,11 @@ class DefaultTokenizer
     public function addAnalyzer(AnalyzerInterface $analyzer)
     {
         $this->analyzers[] = $analyzer;
+    }
+
+    public function getAnalyzers()
+    {
+        return $this->analyzers;
     }
 
     /**
