@@ -4,7 +4,11 @@ namespace Sastrawi\Tokenizer\CharAnalyzer;
 
 class Punctuation implements AnalyzerInterface
 {
-    private static $punctuationChars = array(',', '.', ';', ':', '?', '!', '"', '(', ')', '\'');
+    private static $punctuationChars = array(
+        ',', '.', ';', ':', '?', '!', '"', '(', ')', '\'',
+        '[', ']', '+', '=', '*', '&', '^', '%', '$', '#',
+        '@', '~', '`', '{', '}', '\\', '|', '>', '<',
+    );
 
     public function shouldSplit(Model $model)
     {

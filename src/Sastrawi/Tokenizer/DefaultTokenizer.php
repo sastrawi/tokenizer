@@ -9,6 +9,7 @@
 namespace Sastrawi\Tokenizer;
 
 use Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface;
+use Sastrawi\Trka\Finder\EntityFinderFactory;
 
 /**
  * Default tokenizer for Bahasa Indonesia.
@@ -21,12 +22,17 @@ class DefaultTokenizer
      * @var \Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface[]
      */
     private $analyzers = array();
+    
+    private $entityFinder;
 
     public function __construct()
     {
         $this->addAnalyzer(new CharAnalyzer\Alphanumeric());
         $this->addAnalyzer(new CharAnalyzer\Whitespace());
         $this->addAnalyzer(new CharAnalyzer\Punctuation());
+
+        $entityFinderFactory = new EntityFinderFactory();
+        $this->entityFinder  = $entityFinderFactory->create();
     }
 
     public function addAnalyzers(array $analyzers)
@@ -49,6 +55,8 @@ class DefaultTokenizer
         $tokens = array();
         $tokenBuffer = '';
 
+        $entities = $this->entityFinder->find($text);
+
         for ($i = 0; $i < strlen($text); $i++) {
             $model = new CharAnalyzer\Model($text, $i);
 
@@ -69,7 +77,10 @@ class DefaultTokenizer
                 }
             }
 
-            if ($analyzerResultTrue > 0 && $analyzerResultTrue >= $analyzerResultFalse) {
+            if ($this->isCharEntity($i, $entities)) {
+                // don't split entity
+                $tokenBuffer .= $model->getCurrentChar();
+            } elseif ($analyzerResultTrue > 0 && $analyzerResultTrue >= $analyzerResultFalse) {
                 if ($model->getCurrentChar() !== ' ') {
                     if (!empty($tokenBuffer)) {
                         $tokens[] = $tokenBuffer;
@@ -93,5 +104,16 @@ class DefaultTokenizer
         }
 
         return $tokens;
+    }
+
+    private function isCharEntity($charPos, array $entities)
+    {
+        foreach ($entities as $span) {
+            if ($span->containsIndex($charPos)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
