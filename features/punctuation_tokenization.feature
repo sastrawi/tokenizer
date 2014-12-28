@@ -56,3 +56,14 @@ Feature: Punctuation Tokenization
       Seakan dunia berputar-putar .
       """
 
+  Scenario: Tokenize dash
+    Given The following text:
+      """
+      Gadis itu--yang tadi tak peduli--kini menjadi peduli.
+      """
+    When I tokenize it
+    Then I should get the following tokens:
+      """
+      Gadis itu -- yang tadi tak peduli -- kini menjadi peduli .
+      """
+

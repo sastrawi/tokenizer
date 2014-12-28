@@ -10,9 +10,13 @@ class Hyphen implements AnalyzerInterface
 
     public function shouldSplit(Model $model)
     {
-        if ($model->getCurrentChar() === '-'
-            && (self::isAlphabet($model->getPrevChar()) && self::isAlphabet($model->getNextChar()))) {
-            return false;
+        if ($model->getCurrentChar() === '-') {
+            // don't split dash
+            if ($model->getNextChar() === '-') {
+                return true;
+            } elseif (self::isAlphabet($model->getPrevChar()) && self::isAlphabet($model->getNextChar())) {
+                return false;
+            }
         }
     }
 

@@ -12,7 +12,7 @@ class Alphanumeric implements AnalyzerInterface
     {
         if (self::isAlphanumeric($model->getCurrentChar())
             && ($model->getCurrentChar() === $model->getPrevChar()
-            || $model->getPrevChar() === '-')) {
+            || ($model->getPrevChar() === '-' && !self::prevCharIsDash($model)))) {
             return false;
         } elseif (self::isAlphanumeric($model->getCurrentChar()) && !self::isAlphanumeric($model->getPrevChar())) {
             return true;
@@ -28,5 +28,19 @@ class Alphanumeric implements AnalyzerInterface
         }
 
         return in_array(strtolower($char), self::$alphanumericChars);
+    }
+
+    private static function prevCharIsDash(Model $model)
+    {
+        if ($model->getPrevChar() === '-') {
+            $prev2 = $model->getCharPos() - 2;
+
+            $text = $model->getText();
+            if ($prev2 > 0 && $text[$prev2] === '-') {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
