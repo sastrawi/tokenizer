@@ -10,7 +10,9 @@ class Alphanumeric implements AnalyzerInterface
 
     public function shouldSplit(Model $model)
     {
-        if (self::isAlphanumeric($model->getCurrentChar()) && $model->getCurrentChar() === $model->getPrevChar()) {
+        if (self::isAlphanumeric($model->getCurrentChar())
+            && ($model->getCurrentChar() === $model->getPrevChar()
+            || $model->getPrevChar() === '-')) {
             return false;
         } elseif (self::isAlphanumeric($model->getCurrentChar()) && !self::isAlphanumeric($model->getPrevChar())) {
             return true;

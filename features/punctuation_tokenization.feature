@@ -45,3 +45,14 @@ Feature: Punctuation Tokenization
       " ( Saya ) Aku akan belajar NLP , " kata Budi .
       """
 
+  Scenario: Tokenize repeated word
+    Given The following text:
+      """
+      Seakan dunia berputar-putar.
+      """
+    When I tokenize it
+    Then I should get the following tokens:
+      """
+      Seakan dunia berputar-putar .
+      """
+

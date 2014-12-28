@@ -30,6 +30,7 @@ class DefaultTokenizer
         $this->addAnalyzer(new CharAnalyzer\Alphanumeric());
         $this->addAnalyzer(new CharAnalyzer\Whitespace());
         $this->addAnalyzer(new CharAnalyzer\Punctuation());
+        $this->addAnalyzer(new CharAnalyzer\Hyphen());
 
         $entityFinderFactory = new EntityFinderFactory();
         $this->entityFinder  = $entityFinderFactory->create();
