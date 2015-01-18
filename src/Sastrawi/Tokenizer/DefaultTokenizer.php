@@ -16,7 +16,7 @@ use Sastrawi\Trka\Finder\EntityFinderFactory;
  *
  * @author Andy Librian
  */
-class DefaultTokenizer
+class DefaultTokenizer implements TokenizerInterface
 {
     /**
      * @var \Sastrawi\Tokenizer\CharAnalyzer\AnalyzerInterface[]

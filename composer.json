@@ -45,7 +45,12 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.3.x-dev"
+            "dev-master": "0.4.x-dev"
         }
-    }
+    },
+    "suggest": {
+        "sastrawi/sastrawi": "For stemming Bahasa Indonesia",
+        "sastrawi/sentence-detector": "For splitting sentence in Bahasa Indonesia"
+    },
+    "bin": ["bin/sastrawi-tokenize"]
 }

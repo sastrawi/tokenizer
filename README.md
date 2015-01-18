@@ -40,7 +40,7 @@ Sastrawi Tokenizer dapat diinstall dengan [Composer](https://getcomposer.org).
 3. Tambahkan Sastrawi Sentence Detector ke file `composer.json` Anda :
 
 ```bash
-php composer.phar require sastrawi/tokenizer:dev-master
+php composer.phar require sastrawi/tokenizer:0.*
 ```
 
 Jika Anda masih belum memahami bagaimana cara menggunakan Composer, silahkan baca [Getting Started with Composer](https://getcomposer.org/doc/00-intro.md).
