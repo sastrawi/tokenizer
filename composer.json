@@ -24,7 +24,8 @@
     "require": {
         "php": ">=5.3",
         "sastrawi/string-span": "~1",
-        "sastrawi/trka": "0.*"
+        "sastrawi/trka": "0.*",
+        "symfony/console": "~2.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "~1",
