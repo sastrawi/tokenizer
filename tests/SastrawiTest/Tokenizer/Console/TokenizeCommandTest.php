@@ -28,4 +28,23 @@ class TokenizeCommandTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals("Saya belajar NLP .", $commandTester->getDisplay());
     }
+
+    public function testExecuteOutputFormatJson()
+    {
+        $application = new Application();
+
+        $tokenizerFactory = new TokenizerFactory();
+        $tokenizer = $tokenizerFactory->createDefaultTokenizer();
+        $application->add(new TokenizeCommand($tokenizer));
+
+        $fp = fopen('php://memory', 'rw');
+        fwrite($fp, 'Saya belajar NLP.');
+        fseek($fp, 0);
+
+        $command = $application->find('tokenize');
+        $command->setInputStream($fp);
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(array('command' => $command->getName(), '--output-format' => 'json'));
+        $this->assertEquals('["Saya","belajar","NLP","."]', $commandTester->getDisplay());
+    }
 }
