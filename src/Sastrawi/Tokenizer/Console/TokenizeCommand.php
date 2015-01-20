@@ -53,12 +53,20 @@ class TokenizeCommand extends Command
                  InputOption::VALUE_REQUIRED,
                  'Currently available format: '.implode(', ', $this->availableOutputFormats).'.',
                  'plain'
+             )
+             ->addOption(
+                 'delimiter',
+                 null,
+                 InputOption::VALUE_REQUIRED,
+                 'Token delimiter. This option is available only in plain output format.',
+                 ' '
              );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $outputFormat = $input->getOption('output-format');
+        $this->delimiter = $input->getOption('delimiter');
         $this->validateOutputFormat($outputFormat);
 
         $inputText = '';

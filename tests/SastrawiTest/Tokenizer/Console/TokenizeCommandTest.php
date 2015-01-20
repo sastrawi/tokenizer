@@ -9,42 +9,38 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class TokenizeCommandTest extends \PHPUnit_Framework_TestCase
 {
-    public function testExecute()
+    public function setUp()
     {
-        $application = new Application();
+        $this->application = new Application();
 
         $tokenizerFactory = new TokenizerFactory();
-        $tokenizer = $tokenizerFactory->createDefaultTokenizer();
-        $application->add(new TokenizeCommand($tokenizer));
+        $this->tokenizer = $tokenizerFactory->createDefaultTokenizer();
+        $this->application->add(new TokenizeCommand($this->tokenizer));
 
         $fp = fopen('php://memory', 'rw');
         fwrite($fp, 'Saya belajar NLP.');
         fseek($fp, 0);
 
-        $command = $application->find('tokenize');
-        $command->setInputStream($fp);
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName()));
+        $this->command = $this->application->find('tokenize');
+        $this->command->setInputStream($fp);
+        $this->commandTester = new CommandTester($this->command);
+    }
 
-        $this->assertEquals("Saya belajar NLP .", $commandTester->getDisplay());
+    public function testExecute()
+    {
+        $this->commandTester->execute(array('command' => $this->command->getName()));
+        $this->assertEquals("Saya belajar NLP .", $this->commandTester->getDisplay());
     }
 
     public function testExecuteOutputFormatJson()
     {
-        $application = new Application();
+        $this->commandTester->execute(array('command' => $this->command->getName(), '--output-format' => 'json'));
+        $this->assertEquals('["Saya","belajar","NLP","."]', $this->commandTester->getDisplay());
+    }
 
-        $tokenizerFactory = new TokenizerFactory();
-        $tokenizer = $tokenizerFactory->createDefaultTokenizer();
-        $application->add(new TokenizeCommand($tokenizer));
-
-        $fp = fopen('php://memory', 'rw');
-        fwrite($fp, 'Saya belajar NLP.');
-        fseek($fp, 0);
-
-        $command = $application->find('tokenize');
-        $command->setInputStream($fp);
-        $commandTester = new CommandTester($command);
-        $commandTester->execute(array('command' => $command->getName(), '--output-format' => 'json'));
-        $this->assertEquals('["Saya","belajar","NLP","."]', $commandTester->getDisplay());
+    public function testExecuteOptionDelimiter()
+    {
+        $this->commandTester->execute(array('command' => $this->command->getName(), '--delimiter' => ','));
+        $this->assertEquals("Saya,belajar,NLP,.", $this->commandTester->getDisplay());
     }
 }
