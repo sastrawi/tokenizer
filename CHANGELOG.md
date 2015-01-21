@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+* 0.4.0 (2015-01-21)
+
+  * menambah option pada CLI (Command Line Interface)
+
+* 0.3.0 (2015-01-18)
+
+  * menambah CLI (Command Line Interface)
+
 * 0.2.0 (2014-12-28)
 
   * menangani karakter hyphen (-) agar tidak memisah kata berulang: rumah-rumah.

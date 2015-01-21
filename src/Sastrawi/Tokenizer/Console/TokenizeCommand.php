@@ -46,7 +46,7 @@ class TokenizeCommand extends Command
     protected function configure()
     {
         $this->setName('tokenize')
-             ->setDescription('Tokenize text in Bahasa Indonesia')
+             ->setDescription('Tokenize text in Bahasa Indonesia. It reads text from STDIN then write tokens to STDOUT')
              ->addOption(
                  'output-format',
                  null,
@@ -96,5 +96,10 @@ class TokenizeCommand extends Command
         } elseif ($outputFormat === 'json') {
             return json_encode($tokens);
         }
+    }
+
+    public function getSynopsis()
+    {
+        return parent::getSynopsis()."\n\n<comment>Description:</comment>\n ".$this->getDescription();
     }
 }
